@@ -3,7 +3,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        Lista lista = new Lista();
+        Lista lista = new Lista(5);
 
         Produtor produtor1 = new Produtor(lista);
         produtor1.setName("Produtor 1");

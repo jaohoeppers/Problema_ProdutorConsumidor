@@ -2,13 +2,18 @@ import java.util.ArrayList;
 
 public class Lista {
 
-    private ArrayList<Integer> lista = new ArrayList<Integer>(10);
+    private int tamanho;
+    private ArrayList<Integer> lista = new ArrayList<Integer>(tamanho);
+
+    public Lista (int val){
+        this.tamanho = val;
+    }
 
     public synchronized boolean addLista(int valor) throws InterruptedException {
-        if(lista.size() == 10) {
-            System.out.println("Lista cheia");
-            System.out.println("Aguardando vaga");
-            while (lista.size() == 10) {
+        if(lista.size() == tamanho) {
+            System.out.println(Thread.currentThread().getName() + " Lista cheia");
+            System.out.println(Thread.currentThread().getName() + " Aguardando vaga");
+            while (lista.size() == tamanho) {
                 this.wait();
             }
         }
@@ -29,8 +34,8 @@ public class Lista {
 
     public synchronized int getOneLista() throws InterruptedException {
         if(lista.isEmpty()) {
-            System.out.println("Lista vazia");
-            System.out.println("Aguardando produtor");
+            System.out.println(Thread.currentThread().getName() + " Lista vazia");
+            System.out.println(Thread.currentThread().getName() + " Aguardando produtor");
             while (lista.isEmpty()) {
                 this.wait();
             }
